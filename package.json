@@ -3,12 +3,14 @@
 	"version": "0.5.2",
 	"description": "Activity Heatmap Calendar Plugin for Obsidian",
 	"main": "main.js",
+	"type": "module",
 	"scripts": {
 		"dev": "concurrently \"node esbuild.config.mjs\" \"npm run copyAndWatchMainJS\" \"npm run copyAndWatchStylesJS\" \"npm run copyAndWatchManifestJS\"",
 		"copyAndWatchMainJS": "cpx \"main.js\" \"EXAMPLE_VAULT\\.obsidian\\plugins\\heatmap-calendar\" -w",
 		"copyAndWatchStylesJS": "cpx \"styles.css\" \"EXAMPLE_VAULT\\.obsidian\\plugins\\heatmap-calendar\" -w",
 		"copyAndWatchManifestJS": "cpx \"manifest.json\" \"EXAMPLE_VAULT\\.obsidian\\plugins\\heatmap-calendar\" -w",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"test": "mocha",
 		"version": "node version-bump.mjs && git add manifest.json versions.json"
 	},
 	"keywords": [
@@ -17,14 +19,23 @@
 	"author": "Richard Slettevoll",
 	"license": "Apache-2.0 License",
 	"devDependencies": {
+		"@types/chai": "^4.3.4",
+		"@types/mocha": "^10.0.1",
 		"@types/node": "^18.0.5",
+		"@types/sinon": "^10.0.13",
 		"@typescript-eslint/eslint-plugin": "^5.30.6",
 		"@typescript-eslint/parser": "^5.30.6",
 		"builtin-modules": "^3.3.0",
+		"chai": "^4.3.7",
 		"concurrently": "^7.2.2",
 		"cpx": "^1.5.0",
 		"esbuild": "0.14.49",
+		"mocha": "^10.2.0",
 		"obsidian": "latest",
+		"sinon": "^15.0.1",
+		"ts-mocha": "^10.0.0",
+		"ts-node": "^10.9.1",
+		"ts-sinon": "^2.0.2",
 		"tslib": "2.4.0",
 		"typescript": "4.7.4"
 	}
