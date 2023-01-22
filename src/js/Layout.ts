@@ -1,9 +1,9 @@
-import {Entry} from "./Entry.js";
+import {IEntry} from "./Entry.js";
 import {Box} from "./Box.js";
 
 export interface Layout {
   // todo doc
-  filterEntries(): Entry[];
+  filterEntries(): IEntry[];
 
   // todo doc
   generateBoxes(): Box[];

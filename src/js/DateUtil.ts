@@ -46,23 +46,42 @@ export const datesMatch = (d1: Date | string, d2: Date | string): boolean => {
   if (typeof d2 !== 'string')
     d2 = getDateString(d2)
 
-  return d1 === d2
+  return d1 === d2;
 }
 
-export const incrementDate = (date: Date): Date => {
-  return new Date(date.getTime() + ONE_DAY_MILI)
+/**
+ * Returns a new date object with 24 hours added
+ */
+export const incrementDate = (date: Date, count: number = 1): Date => {
+  return new Date(date.getTime() + (ONE_DAY_MILI * count));
 }
 
-export const decrementDate = (date: Date): Date => {
-  return new Date((date.getTime() - ONE_DAY_MILI))
+/**
+ * Returns a new date object with 24 hours subtracted
+ */
+export const decrementDate = (date: Date, count: number = 1): Date => {
+  return new Date(date.getTime() - (ONE_DAY_MILI * count));
 }
 
+/**
+ * Zeros out time info of a date object
+ */
 export const timeFloorDate = (date: Date): Date => {
-  return new Date(Date.UTC(date.getFullYear(), date.getUTCMonth(), date.getUTCDate(), 0, 0, 0))
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 0, 0, 0))
 }
 
+/**
+ * Returns a new date object for the runtime day
+ */
 export const getNow = (): Date => {
   return timeFloorDate(new Date(Date.now()))
+}
+
+/**
+ * Check if a ISO date string matches the runtime day
+ */
+export const isToday = (date: string): boolean => {
+  return datesMatch(date, getNow());
 }
 
 /**

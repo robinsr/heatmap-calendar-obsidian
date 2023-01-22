@@ -1,7 +1,7 @@
-import {Layout} from "./Layout";
-import {Entry} from "./Entry";
-import {Box} from "./Box";
-import {CalendarData} from "./CalendarData";
+import {Layout} from "./Layout.js";
+import {IEntry} from "./Entry.js";
+import {Box, BoxImpl} from "./Box.js";
+import {decrementDate, DOW, getDateString, getNow, getStartOfWeekDate, incrementDate} from "./DateUtil.js";
 
 /**
  * Returns a number representing how many days into the year the supplied date is.
@@ -22,97 +22,47 @@ const getHowManyDaysIntoYearLocal = (date: Date): number => {
   )
 }
 
-const clamp = (input: number, min: number, max: number): number => {
-  return input < min ? min : input > max ? max : input
-}
-
-const map = (current: number, inMin: number, inMax: number, outMin: number, outMax: number): number => {
-  const mapped: number = ((current - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
-  return clamp(mapped, outMin, outMax)
-}
 
 /**
  * Generates a layout bounded by Jan 1st and Dec 31st for a given year
  */
 export class YearLayout implements Layout {
 
-  private allEntries: Entry[];
+  private allEntries: IEntry[];
   private year: number;
-  private showCurrentDayBorder: boolean;
 
-  constructor(settings: CalendarData) {
-    this.allEntries = settings.entries;
-
-    if (settings.year) {
-      this.year = settings.year;
-    } else {
-      throw new Error('Error creating YearLayout; settings.year not defined.');
-    }
-
-    this.showCurrentDayBorder = settings.showCurrentDayBorder ?? false;
+  constructor(year: number, entries: IEntry[]) {
+    this.allEntries = entries;
+    this.year = year;
   }
 
-
-  filterEntries(): Entry[] {
-    return this.allEntries.filter(e => new Date(e.date + "T00:00").getFullYear() === this.year) ?? this.allEntries;
+  filterEntries(): IEntry[] {
+    return this.allEntries.filter(e => new Date(e.date + "T00:00").getUTCFullYear() === this.year) ?? this.allEntries;
   }
 
   generateBoxes(): Box[] {
 
-    const { allEntries, showCurrentDayBorder, year } = this;
+    const { year } = this;
 
-    // const mappedEntries: Entry[] = []
-    // allEntries.forEach(e => {
-    //   const newEntry = {
-    //     intensity: defaultEntryIntensity,
-    //     ...e,
-    //   }
-    //   const colorIntensities = colors[e.color] ?? colors[Object.keys(colors)[0]]
-    //   const numOfColorIntensities = Object.keys(colorIntensities).length
-    //
-    //   if (minimumIntensity === maximumIntensity && intensityScaleStart === intensityScaleEnd) {
-    //     newEntry.intensity = numOfColorIntensities;
-    //   } else {
-    //     newEntry.intensity = Math.round(map(newEntry.intensity, intensityScaleStart, intensityScaleEnd, 1, numOfColorIntensities))
-    //   }
-    //
-    //   mappedEntries[this.getHowManyDaysIntoYear(new Date(e.date))] = newEntry
-    // })
+    const firstDayOfYear = new Date(Date.UTC(year, 0, 1));
+    let leadingDays = getStartOfWeekDate(firstDayOfYear, DOW.MON);
 
-    const firstDayOfYear = new Date(Date.UTC(year, 0, 1))
-    let numberOfEmptyDaysBeforeYearBegins = (firstDayOfYear.getUTCDay() + 6) % 7
-
+    console.log(getDateString(leadingDays), getDateString(firstDayOfYear));
 
     const boxes: Array<Box> = []
 
-    while (numberOfEmptyDaysBeforeYearBegins) {
-      //boxes.push({backgroundColor: "transparent",})
-      numberOfEmptyDaysBeforeYearBegins--
+    while (leadingDays < firstDayOfYear) {
+      boxes.push(BoxImpl.fromDate(leadingDays, true))
+      leadingDays = incrementDate(leadingDays)
     }
 
     const lastDayOfYear = new Date(Date.UTC(year, 11, 31))
     const numberOfDaysInYear = getHowManyDaysIntoYear(lastDayOfYear) //eg 365 or 366
-    const todaysDayNumberLocal = getHowManyDaysIntoYearLocal(new Date())
+    const todaysDayNumberLocal = getHowManyDaysIntoYearLocal(getNow())
 
-    for (let day = 1; day <= numberOfDaysInYear; day++) {
-
-      //const box: Box = {}
-
-      //if (day === todaysDayNumberLocal && showCurrentDayBorder) box.classNames?.push("today")
-      //
-      // if (mappedEntries[day]) {
-      //   box.classNames?.push("hasData")
-      //   const entry = mappedEntries[day]
-      //
-      //   box.date = entry.date
-      //
-      //   if (entry.content) box.content = entry.content
-      //
-      //   const currentDayColors = entry.color ? colors[entry.color] : colors[Object.keys(colors)[0]]
-      //   box.backgroundColor = currentDayColors[entry.intensity as number - 1]
-
-      //} else box.classNames?.push("isEmpty")
-      //boxes.push(box)
+    for (let day = 0; day <= numberOfDaysInYear; day++) {
+      let boxDate = incrementDate(firstDayOfYear, day);
+      boxes.push(BoxImpl.fromDate(boxDate));
     }
 
     return boxes;

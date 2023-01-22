@@ -16,6 +16,7 @@ see [github repo](https://github.com/Richardsl/heatmap-calendar-obsidian#readme)
 dv.span("**🏋️ Exercise 🏋️**")
 
 const calendarData = {
+    rolling: true,
     colors: {
         red: ["#ff9e82","#ff7b55","#ff4d1a","#e73400","#bd2a00",]
     },
@@ -24,6 +25,7 @@ const calendarData = {
 
 for(let page of dv.pages('"daily notes"').where(p=>p.exercise)){
     calendarData.entries.push({
+        color: 'red',
         date: page.file.name,
         intensity: page.exercise,
         content: await dv.span(`[](${page.file.name})`), //for hover preview
@@ -36,15 +38,18 @@ renderHeatmapCalendar(this.container, calendarData)
 ```
  
 ```dataviewjs
+
 dv.span("**💸 Money Spent 💸**")
 
 const calendarData = {
+    year: 2022,
     entries: [],
 }
 
 for(let page of dv.pages('"daily notes"').where(p=>p.moneySpent)){
 
     calendarData.entries.push({
+    
         date: page.file.name,
         intensity: page.moneySpent,
         content: await dv.span(`[](${page.file.name})`), //for hover preview
@@ -60,6 +65,7 @@ renderHeatmapCalendar(this.container, calendarData)
 dv.span("**🍺 Alcohol Consumption 🍺**")
 
 const calendarData = {
+    year: 2022,
     colors: {
         blue: ["#ffdf04","#ffbe04","#ff9a03","#ff6d02","#ff2c01"]
     },
@@ -84,6 +90,8 @@ renderHeatmapCalendar(this.container, calendarData)
 dv.span("**🔗 Writing **- Dont break the chain! 🔗🔗🔗🔗")
 
 const calendarData = {
+    year: 2022,
+    defaultEntryIntensity: 1,
     colors: {
         white: ["#fff","#fff","#fff","#fff","#fff"],
     },
@@ -93,6 +101,7 @@ const calendarData = {
 for(let page of dv.pages('"daily notes"').where(p=>p.writing)){
 	 
     calendarData.entries.push({
+    color: 'white',
         date: page.file.name,
         content: await dv.span(`[🔗](${page.file.name})`), //for hover preview
     }) 
@@ -112,6 +121,7 @@ renderHeatmapCalendar(this.container, calendarData)
 dv.span("**👫 Social tracker 🧑‍🤝‍🧑**")
 
 const calendarData = {
+    year: 2022,
     colors: {
         blue: ["#8cb9ff","#69a3ff","#428bff","#1872ff","#0058e2"],
         pink: ["#ff96cb","#ff70b8","#ff3a9d","#ee0077","#c30062"],
@@ -143,7 +153,8 @@ dv.span("** 😊 Mood  😥**")
 const hue1 = 13 //red
 const hue2 = 132 //green
 
-const calendarData = { 
+const calendarData = {
+    year: 2022,
     intensityScaleStart: 1,
     intensityScaleEnd: 9,
     colors: {

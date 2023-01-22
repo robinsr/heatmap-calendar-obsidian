@@ -23,6 +23,8 @@ for(let page of dv.pages('"daily notes"').where(p=>p.exercise)){
 renderHeatmapCalendar(this.container, calendarData)
 
 ```
+
+
 ```dataviewjs
 
 dv.span("**🏋️ Exercise 🏋️** (Green if you reached your goal of 45 minutes)")

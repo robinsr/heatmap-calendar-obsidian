@@ -1,14 +1,15 @@
 import {Plugin} from 'obsidian';
-import {Entry} from 'src/js/Entry';
-import {Box} from "./src/js/Box";
-import {CalendarData} from "./src/js/CalendarData";
-import {RollingLayout} from "./src/js/RollingLayout";
-import {YearLayout} from "./src/js/YearLayout";
-import {Layout} from "./src/js/Layout";
+import SettingsStore from 'src/js/SettingsStore.js';
+import {Box} from "./src/js/Box.js";
+import {CalendarData} from "./src/js/CalendarData.js";
+import {RollingLayout} from "./src/js/RollingLayout.js";
+import {YearLayout} from "./src/js/YearLayout.js";
+import {Layout} from "./src/js/Layout.js";
+import {Intensor} from "./src/js/Intensor.js";
 
 
 const DEFAULT_SETTINGS: CalendarData = {
-  year: new Date().getFullYear(),
+  year: new Date().getUTCFullYear(),
   colors: {
     default: ["#c6e48b", "#7bc96f", "#49af5d", "#2e8840", "#196127",],
   },
@@ -24,9 +25,6 @@ export default class HeatmapCalendar extends Plugin {
 
   settings: CalendarData
 
-
-
-
   async onload() {
 
     await this.loadSettings()
@@ -37,26 +35,41 @@ export default class HeatmapCalendar extends Plugin {
       const year = calendarData.year ?? this.settings.year;
       const colors = calendarData.colors ?? this.settings.colors;
 
-      const layout: Layout = calendarData.rolling ? new RollingLayout(calendarData) : new YearLayout(calendarData);
+      SettingsStore.set(calendarData);
 
+      const allEntries = calendarData.entries;
+
+      const layout: Layout = calendarData.rolling ? new RollingLayout(allEntries) : new YearLayout(year!, allEntries);
+
+      // Filter entries to just those in view
       const calEntries = layout.filterEntries();
 
-      const showCurrentDayBorder = calendarData.showCurrentDayBorder ?? this.settings.showCurrentDayBorder
+      let intensor = new Intensor(calendarData, colors, calEntries);
+
+      // Create the full set of render boxes
+      const boxes: Array<Box> = layout.generateBoxes();
+
+      // Match up entries to boxes
+      calEntries.forEach(e => {
+        let match = boxes.find(b => b.date === e.date);
+
+        if (match) {
+          match.entry = e;
+        }
+
+        // And resolve intensity to a hex value
+        e.color = intensor.mapEntry(e);
+      });
 
 
 
 
-
-
-
-
-      const boxes: Array<Box> = layout.generateBoxes()
 
       const heatmapCalendarGraphDiv = createDiv({
         cls: "heatmap-calendar-graph",
         parent: el,
       })
-      
+
       createDiv({
         cls: "heatmap-calendar-year",
         text: String(year).slice(2),

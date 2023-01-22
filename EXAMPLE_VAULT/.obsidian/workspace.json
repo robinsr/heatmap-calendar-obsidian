@@ -11,8 +11,26 @@
             "id": "c0a320f93508fa45",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Overview.md",
+                "mode": "preview",
+                "backlinks": false,
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "1432d016d1c53da9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "daily notes/2022-03-09.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": true
+              }
             }
           }
         ]
@@ -77,18 +95,23 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-metatable:Metatable": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "command-palette:Open command palette": false,
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "187f209bf5981b5a",
+  "active": "c0a320f93508fa45",
   "lastOpenFiles": [
+    "daily notes/2022-03-09.md",
     "Overview.md",
+    "Overview extended.md",
+    "daily notes/2022-01-03.md",
+    "daily notes/2022-01-30.md",
+    "daily notes/2023-01-03.md",
     "daily notes/2022-03-11.md",
     "daily notes/2022-03-12.md",
-    "Overview extended.md",
     "daily notes/2022-01-02.md",
     "daily notes/2022-01-01.md"
   ]

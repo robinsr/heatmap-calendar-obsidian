@@ -3,7 +3,7 @@ import {
   decrementDate, DOW,
   getDateString,
   getEndOfWeekDate, getNow, getStartOfWeekDate,
-  incrementDate,
+  incrementDate, isToday,
   padLeft
 } from '../src/js/DateUtil.js';
 
@@ -31,6 +31,7 @@ const dateDecember31 = new Date(Date.UTC(2019, 11, 31, 12, 6, 0, 0))
 describe('DateUtil', function () {
 
   describe('Sinon stub tests', function () {
+    let runtimeToday = new Date(Date.now());
     let mockToday = new Date(Date.UTC(2019, 5, 20, 12, 6, 0));
     let dateNowStub: SinonStub;
 
@@ -66,6 +67,15 @@ describe('DateUtil', function () {
         equal(today.toISOString(), '2019-06-20T00:00:00.000Z', 'ISO string should be fake date');
 
         assert.callCount(dateNowStub, 1);
+      });
+    });
+
+    describe('isToday', function () {
+      it('should return true for date strings matching runtime date', function () {
+        ok(isToday('2019-06-20'), 'should be ok with this date string');
+
+        let runtimeISO = getDateString(runtimeToday);
+        ok(!isToday(runtimeISO), `Should not match today's date ${runtimeISO}` );
       });
     });
   });
@@ -123,14 +133,20 @@ describe('DateUtil', function () {
     it('Adds one day to a date', function () {
       let plusOne = incrementDate(dateJune21);
 
-      equal('2019-06-22', getDateString(plusOne));
+      equal(getDateString(plusOne), '2019-06-22');
       // does not mutate original object
-      equal('2019-06-21', getDateString(dateJune21));
+      equal(getDateString(dateJune21), '2019-06-21');
 
       // year rollover
       plusOne = incrementDate(dateDecember31);
       equal(getDateString(plusOne), '2020-01-01', 'Year did not roll forward!');
       equal(getDateString(dateDecember31), '2019-12-31', 'original date object should not mutate!');
+    });
+
+    it('Adds multiple days to a date', function() {
+      let plusTen = incrementDate(dateDecember31, 10);
+
+      equal(getDateString(plusTen), '2020-01-10');
     });
   });
 
@@ -147,6 +163,12 @@ describe('DateUtil', function () {
       equal(getDateString(minusOne), '2018-12-31', 'Year did not roll back!');
       equal(getDateString(dateJanuary1), '2019-01-01', 'original date object should not mutate!');
     });
+
+    it('Subtracts multiple days from a date', function() {
+      let minusTen = decrementDate(dateJanuary1, 10);
+
+      equal(getDateString(minusTen), '2018-12-22');
+    })
   });
 
   describe('getEndOfWeekDate', function () {
