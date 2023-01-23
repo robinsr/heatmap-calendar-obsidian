@@ -43,7 +43,7 @@ export const newTestEntry = (
     content: `${formatMo(month)} ${formatDay(day)}, ${year}`, // Ex: "Jun 16th, 2018"
   }
 
-  if (intensity) {
+  if (intensity !== undefined) {
     e.intensity = intensity;
   }
 

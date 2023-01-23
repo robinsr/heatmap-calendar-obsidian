@@ -1,4 +1,7 @@
 import SettingsStore from "./SettingsStore.js";
+import {default as logger} from "./Log.js";
+
+const log = logger.module('Entry')
 
 export interface IEntry {
   date: string
@@ -22,12 +25,18 @@ export class Entry implements IEntry {
   get intensity() {
     let defaultI = SettingsStore.get('defaultEntryIntensity');
 
+    if (this.entry.intensity === undefined) {
+      log.debug(`Entry ${this.date} intensity is Undefined`)
+      return defaultI || 0;
+    }
+
     // Falsy Zeros are weird
     if (this.entry.intensity === 0) {
+      log.debug(`Entry ${this.date} intensity is ZER0`)
       return 0;
     }
 
-    return this.entry.intensity || defaultI || 1;
+    return this.entry.intensity;
   }
 
 

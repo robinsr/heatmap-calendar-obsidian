@@ -21,13 +21,13 @@
             }
           },
           {
-            "id": "1432d016d1c53da9",
+            "id": "ed5c6ca5018b486a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "daily notes/2022-03-09.md",
-                "mode": "source",
+                "file": "Single Color Test.md",
+                "mode": "preview",
                 "backlinks": false,
                 "source": true
               }
@@ -104,15 +104,15 @@
   },
   "active": "c0a320f93508fa45",
   "lastOpenFiles": [
-    "daily notes/2022-03-09.md",
+    "daily notes/2022-02-17.md",
     "Overview.md",
     "Overview extended.md",
+    "Single Color Test.md",
+    "daily notes/2022-03-09.md",
     "daily notes/2022-01-03.md",
     "daily notes/2022-01-30.md",
     "daily notes/2023-01-03.md",
     "daily notes/2022-03-11.md",
-    "daily notes/2022-03-12.md",
-    "daily notes/2022-01-02.md",
-    "daily notes/2022-01-01.md"
+    "daily notes/2022-03-12.md"
   ]
 }
