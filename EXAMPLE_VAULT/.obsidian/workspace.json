@@ -13,6 +13,19 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "daily notes/2022-02-06.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "e3904fc4ef1dd2f5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "Overview.md",
                 "mode": "preview",
                 "backlinks": false,
@@ -33,7 +46,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -102,17 +116,17 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "c0a320f93508fa45",
+  "active": "e3904fc4ef1dd2f5",
   "lastOpenFiles": [
-    "daily notes/2022-02-17.md",
+    "daily notes/2023-01-19.md",
     "Overview.md",
+    "daily notes/2022-02-06.md",
+    "daily notes/2023-01-23.md",
     "Overview extended.md",
     "Single Color Test.md",
+    "daily notes/2022-02-17.md",
     "daily notes/2022-03-09.md",
     "daily notes/2022-01-03.md",
-    "daily notes/2022-01-30.md",
-    "daily notes/2023-01-03.md",
-    "daily notes/2022-03-11.md",
-    "daily notes/2022-03-12.md"
+    "daily notes/2022-01-30.md"
   ]
 }

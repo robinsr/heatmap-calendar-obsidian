@@ -1,0 +1,13 @@
+---
+moneySpent: 150
+exercise: 30 minutes
+
+mood: 3
+---
+## day no 1
+today is a good day!
+ 
+
+i did some writing [writing:: true]
+
+lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum

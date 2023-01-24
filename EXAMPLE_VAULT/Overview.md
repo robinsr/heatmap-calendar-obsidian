@@ -39,10 +39,33 @@ renderHeatmapCalendar(this.container, calendarData)
  
 ```dataviewjs
 
-dv.span("**💸 Money Spent 💸**")
+dv.span("**💸 Money Spent 2022 💸**")
 
 const calendarData = {
     year: 2022,
+    entries: [],
+}
+
+for(let page of dv.pages('"daily notes"').where(p=>p.moneySpent)){
+
+    calendarData.entries.push({
+    
+        date: page.file.name,
+        intensity: page.moneySpent,
+        content: await dv.span(`[](${page.file.name})`), //for hover preview
+    })  
+}
+
+renderHeatmapCalendar(this.container, calendarData)
+
+```
+
+```dataviewjs
+
+dv.span("**💸 Money Spent (Rolling) 💸**")
+
+const calendarData = {
+    rolling: true,
     entries: [],
 }
 
