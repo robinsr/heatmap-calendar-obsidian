@@ -1,5 +1,5 @@
 import {CalendarData} from "./CalendarData.js";
-
+import {DOW} from "./DateUtil.js";
 
 
 export class SettingsStore {
@@ -24,11 +24,11 @@ export class SettingsStore {
   }
 
   get dayOfWeekStart(): number {
-    return 1; // Monday
+    return DOW.SUN;
   }
 
   get dayOfWeekEnd(): number {
-    return 0; // Sunday
+    return (this.dayOfWeekStart + 6) % 7;
   }
 }
 

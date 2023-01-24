@@ -1,12 +1,15 @@
 import * as Console from "console";
 
 export enum LogLevel {
-  'error',
-  'info',
-  'debug'
+  off,
+  error,
+  info,
+  debug
 }
 
 type logFn = typeof Console.info | typeof Console.debug | typeof Console.error;
+
+const NAME = 'HeatmapCalendar'
 
 let level = LogLevel.error;
 
@@ -38,7 +41,7 @@ export class Logger {
   }
 
   private log(fn: logFn, ...args: any[]): void {
-    fn(...args);
+    fn(NAME, ...args);
   }
 
   info(...args: any[]): void {
@@ -54,7 +57,9 @@ export class Logger {
   }
 
   error(...args: any[]): void {
-    this.log(console.error, '[ERROR]' + this.modName, ...args);
+    if (this.level >= LogLevel.error) {
+      this.log(console.error, '[ERROR]' + this.modName, ...args);
+    }
   }
 
   module(moduleName: string): Logger {
@@ -62,4 +67,4 @@ export class Logger {
   }
 }
 
-export default new Logger(LogLevel.error);
+export default new Logger();

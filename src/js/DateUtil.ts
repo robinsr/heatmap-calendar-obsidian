@@ -16,13 +16,15 @@ export const DOW = {
   SUN: 0, MON: 1, TUE: 2, WED: 3, THU: 4, FRI: 5, SAT: 6,
 }
 
+export const MONTHS = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
+
 
 // export for test
 export const padLeft = (input: string | number, length: number) => {
   let str = input.toString()
 
   while (str.length < length)
-    str = "0" + str
+    str = '0' + str
 
   return str
 }
@@ -31,7 +33,7 @@ export const padLeft = (input: string | number, length: number) => {
  * Returns the corresponding date string (YYYY-MM-DD) for a given Date object
  */
 export const getDateString = (date: Date): string => {
-  return [date.getUTCFullYear(), padLeft(date.getUTCMonth() + 1, 2), padLeft(date.getUTCDate(), 2)].join("-")
+  return [date.getUTCFullYear(), padLeft(date.getUTCMonth() + 1, 2), padLeft(date.getUTCDate(), 2)].join('-')
 }
 
 /**

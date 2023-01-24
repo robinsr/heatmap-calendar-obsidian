@@ -1,9 +1,9 @@
 import {ColorOptions, IntensitySettings} from "./CalendarData.js";
 import {Entry, IEntry} from "./Entry.js";
-import {default as logger, LogLevel} from "./Log.js";
+import logger, {LogLevel} from "./Log.js";
 
 const log = logger.module('Intensor');
-
+//log.setLevel(LogLevel.debug)
 
 type LinearFn = (x: number) => number;
 
@@ -118,7 +118,7 @@ export class Intensor {
       return colorValue;
 
     } else {
-      console.error(`No color function found for "${paletteName}" with intensity [${entry.intensity}]`);
+      log.error(`No color function found for "${paletteName}" with intensity [${entry.intensity}]`);
       return DEFAULT_COLOR;
     }
 

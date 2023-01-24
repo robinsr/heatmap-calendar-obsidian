@@ -1,7 +1,11 @@
+import logger from "./Log.js";
+import {getDateString, getNow, getStartOfWeekDate, incrementDate, MONTHS} from "./DateUtil.js";
 import {Layout} from "./Layout.js";
 import {IEntry} from "./Entry.js";
 import {Box, BoxImpl} from "./Box.js";
-import {decrementDate, DOW, getDateString, getNow, getStartOfWeekDate, incrementDate} from "./DateUtil.js";
+import SettingsStore from "./SettingsStore.js";
+
+const log = logger.module('YearLayout');
 
 /**
  * Returns a number representing how many days into the year the supplied date is.
@@ -26,14 +30,19 @@ const getHowManyDaysIntoYearLocal = (date: Date): number => {
 /**
  * Generates a layout bounded by Jan 1st and Dec 31st for a given year
  */
-export class YearLayout implements Layout {
+export class YearLayout extends Layout {
 
   private allEntries: IEntry[];
   private year: number;
 
   constructor(year: number, entries: IEntry[]) {
+    super();
     this.allEntries = entries;
     this.year = year;
+  }
+
+  getMonthLabels(): string[] {
+    return MONTHS;
   }
 
   filterEntries(): IEntry[] {
@@ -41,13 +50,12 @@ export class YearLayout implements Layout {
   }
 
   generateBoxes(): Box[] {
-
     const { year } = this;
 
     const firstDayOfYear = new Date(Date.UTC(year, 0, 1));
-    let leadingDays = getStartOfWeekDate(firstDayOfYear, DOW.MON);
+    let leadingDays = getStartOfWeekDate(firstDayOfYear, SettingsStore.dayOfWeekStart);
 
-    console.log(getDateString(leadingDays), getDateString(firstDayOfYear));
+    log.debug("Year start date:", getDateString(leadingDays), "Year end date:", getDateString(firstDayOfYear));
 
     const boxes: Array<Box> = []
 

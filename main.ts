@@ -1,4 +1,6 @@
 import {Plugin} from 'obsidian';
+
+import logger, {LogLevel} from "./src/js/Log.js";
 import SettingsStore from 'src/js/SettingsStore.js';
 import {Box} from "./src/js/Box.js";
 import {CalendarData} from "./src/js/CalendarData.js";
@@ -26,6 +28,9 @@ export default class HeatmapCalendar extends Plugin {
   settings: CalendarData
 
   async onload() {
+
+
+    logger.setLevel(LogLevel.info);
 
     await this.loadSettings()
 
@@ -61,10 +66,6 @@ export default class HeatmapCalendar extends Plugin {
         e.color = intensor.mapEntry(e);
       });
 
-
-
-
-
       const heatmapCalendarGraphDiv = createDiv({
         cls: "heatmap-calendar-graph",
         parent: el,
@@ -81,31 +82,18 @@ export default class HeatmapCalendar extends Plugin {
         parent: heatmapCalendarGraphDiv,
       })
 
-      createEl("li", {text: "Jan", parent: heatmapCalendarMonthsUl,})
-      createEl("li", {text: "Feb", parent: heatmapCalendarMonthsUl,})
-      createEl("li", {text: "Mar", parent: heatmapCalendarMonthsUl,})
-      createEl("li", {text: "Apr", parent: heatmapCalendarMonthsUl,})
-      createEl("li", {text: "May", parent: heatmapCalendarMonthsUl,})
-      createEl("li", {text: "Jun", parent: heatmapCalendarMonthsUl,})
-      createEl("li", {text: "Jul", parent: heatmapCalendarMonthsUl,})
-      createEl("li", {text: "Aug", parent: heatmapCalendarMonthsUl,})
-      createEl("li", {text: "Sep", parent: heatmapCalendarMonthsUl,})
-      createEl("li", {text: "Oct", parent: heatmapCalendarMonthsUl,})
-      createEl("li", {text: "Nov", parent: heatmapCalendarMonthsUl,})
-      createEl("li", {text: "Dec", parent: heatmapCalendarMonthsUl,})
+      layout.getMonthLabels().forEach(ml => {
+        createEl("li", { text: ml, parent: heatmapCalendarMonthsUl, })
+      });
 
       const heatmapCalendarDaysUl = createEl("ul", {
         cls: "heatmap-calendar-days",
         parent: heatmapCalendarGraphDiv,
-      })
+      });
 
-      createEl("li", {text: "Mon", parent: heatmapCalendarDaysUl,})
-      createEl("li", {text: "Tue", parent: heatmapCalendarDaysUl,})
-      createEl("li", {text: "Wed", parent: heatmapCalendarDaysUl,})
-      createEl("li", {text: "Thu", parent: heatmapCalendarDaysUl,})
-      createEl("li", {text: "Fri", parent: heatmapCalendarDaysUl,})
-      createEl("li", {text: "Sat", parent: heatmapCalendarDaysUl,})
-      createEl("li", {text: "Sun", parent: heatmapCalendarDaysUl,})
+      layout.getDayOfWeekLabels().forEach(dow => {
+        createEl("li", {text: dow, parent: heatmapCalendarDaysUl,})
+      });
 
       const heatmapCalendarBoxesUl = createEl("ul", {
         cls: "heatmap-calendar-boxes",
@@ -122,7 +110,6 @@ export default class HeatmapCalendar extends Plugin {
           parent: heatmapCalendarBoxesUl,
         })
       })
-
     }
   }
 

@@ -1,16 +1,18 @@
+import logger from "./Log.js";
 import {
-  decrementDate,
-  DOW,
   incrementDate,
   getNow,
-  timeFloorDate,
   getEndOfWeekDate,
-  getStartOfWeekDate, ONE_YEAR_MILI, getDateString
+  getStartOfWeekDate,
+  MONTHS,
+  ONE_YEAR_MILI
 } from "./DateUtil.js"
 import { Layout } from "./Layout.js"
 import { IEntry } from './Entry.js'
 import {Box, BoxImpl} from "./Box.js"
-import {CalendarData} from "./CalendarData.js";
+import SettingsStore from "./SettingsStore.js";
+
+const log = logger.module('RollingLayout');
 
 /**
  * Returns a Date object to use as the starting point for a rolling calendar
@@ -20,21 +22,22 @@ const getRollingStartDate = (): Date => {
   let now = getNow();
   let minusAYear = new Date(now.getTime() - ONE_YEAR_MILI)
 
-  return getStartOfWeekDate(minusAYear, DOW.MON);
+  return getStartOfWeekDate(minusAYear, SettingsStore.dayOfWeekStart);
 }
 
 const getRollingEndDate = (): Date => {
   let now = getNow();
-  return getEndOfWeekDate(now, DOW.SUN);
+  return getEndOfWeekDate(now, SettingsStore.dayOfWeekEnd);
 }
 
 /**
  * Generates a layout bounded by the current date, and the current date minus 365 days
  */
-export class RollingLayout implements Layout {
+export class RollingLayout extends Layout {
   private readonly allEntries: IEntry[];
 
   constructor(entries: IEntry[]) {
+    super();
     this.allEntries = entries;
   }
 
@@ -43,6 +46,8 @@ export class RollingLayout implements Layout {
     // rolling start needs to start one day before to capture
     let startDate = getRollingStartDate();
     let endDate = getRollingEndDate();
+
+    log.info('Start date:', startDate, 'End date:', endDate);
 
     return [ ...this.allEntries ]
       .filter(e => {
@@ -74,5 +79,17 @@ export class RollingLayout implements Layout {
     }
 
     return boxes;
+  }
+
+  getMonthLabels(): string[] {
+    let monthOffset = getNow().getUTCMonth() + 1;
+
+    let orderedMonths: string[] = [];
+
+    for (let i = 0; i < 12; i++) {
+      orderedMonths.push(MONTHS[(monthOffset + i) % 12 ])
+    }
+
+    return orderedMonths;
   }
 }

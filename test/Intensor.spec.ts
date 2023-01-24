@@ -1,7 +1,4 @@
-import {default as log, LogLevel, setLevel} from "../src/js/Log.js";
-setLevel(LogLevel.debug);
-
-
+import logger, {LogLevel, setLevel} from "../src/js/Log.js";
 import {Intensor} from "../src/js/Intensor.js";
 import {IEntry} from "../src/js/Entry.js";
 import {newTestEntry, TEST_YEAR} from "./TestData.js";
@@ -9,6 +6,9 @@ import {CalendarData, IntensitySettings} from "../src/js/CalendarData.js";
 import SettingsStore from "../src/js/SettingsStore.js";
 import {expect} from "chai";
 
+setLevel(LogLevel.off)
+
+const log = logger.module('Intensor.spec');
 
 const EMPTY = Symbol.for('empty');
 
@@ -69,7 +69,7 @@ const runTest = (settings: IntensitySettings, entries: IEntry[], paletteName: st
     });
   }, {});
 
-  console.log(mappedEntries);
+  log.debug(mappedEntries);
 
   return mappedEntries;
 }
