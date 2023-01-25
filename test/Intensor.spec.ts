@@ -47,6 +47,7 @@ const DEFAULT_SETTINGS: CalendarData = {
   colors: testPalettes,
   entries: [],
   showCurrentDayBorder: true,
+  startDayOfWeek: 1
 }
 
 /**
@@ -56,7 +57,7 @@ const DEFAULT_SETTINGS: CalendarData = {
  *   - i-[entry index]: result (one-indexed)
  */
 const runTest = (settings: IntensitySettings, entries: IEntry[], paletteName: string = "paletteA"): TestResult => {
-  SettingsStore.set(Object.assign({}, DEFAULT_SETTINGS, settings));
+  SettingsStore.setConfig(Object.assign({}, DEFAULT_SETTINGS, settings));
   SettingsStore.defaultPalette = paletteName;
 
   let intense = new Intensor(settings, testPalettes, entries);

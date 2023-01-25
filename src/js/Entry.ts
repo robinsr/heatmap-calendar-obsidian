@@ -23,7 +23,7 @@ export class Entry implements IEntry {
   }
 
   get intensity() {
-    let defaultI = SettingsStore.get('defaultEntryIntensity');
+    let defaultI = SettingsStore.getConfig('defaultEntryIntensity');
 
     if (this.entry.intensity === undefined) {
       log.debug(`Entry ${this.date} intensity is Undefined`)

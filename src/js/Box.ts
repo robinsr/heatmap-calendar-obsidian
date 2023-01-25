@@ -66,7 +66,7 @@ export class BoxImpl implements Box {
   get classNames(): string {
     this.classes.push(this.entry ? BoxCSS.HAS_DATA : BoxCSS.IS_EMPTY);
 
-    if (store.get('showCurrentDayBorder') && isToday(this.date)) {
+    if (store.getConfig('showCurrentDayBorder') && isToday(this.date)) {
       this.classes.push(BoxCSS.TODAY);
     }
 
