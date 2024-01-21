@@ -1,4 +1,4 @@
-import { IEntry } from "./Entry.js";
+import { IEntry } from "../model/Entry.js";
 
 
 export interface ColorOptions {
@@ -23,4 +23,4 @@ export interface PluginSettings {
   startDayOfWeek: number;
 }
 
-export interface CalendarData extends InstanceSettings, PluginSettings {}
+export interface Api extends InstanceSettings, PluginSettings {}

@@ -5,7 +5,7 @@ import {
   getEndOfWeekDate, getNow, getStartOfWeekDate,
   incrementDate, isToday,
   padLeft
-} from '../src/js/DateUtil.js';
+} from '../src/util/DateUtil.js';
 
 import {ok, equal, notEqual} from 'assert';
 import sinon, {assert, SinonStub} from 'sinon';

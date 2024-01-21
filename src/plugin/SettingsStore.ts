@@ -1,4 +1,4 @@
-import {InstanceSettings, PluginSettings} from "./CalendarData.js";
+import {InstanceSettings, PluginSettings} from "./api.js";
 
 export const DEFAULT_CONFIG: InstanceSettings = {
   year: new Date().getUTCFullYear(),
@@ -12,10 +12,14 @@ export const DEFAULT_CONFIG: InstanceSettings = {
   intensityScaleEnd: 5
 }
 
+export const DEFAULT_SETTINGS: PluginSettings = {
+  startDayOfWeek: 0
+}
+
 
 export class SettingsStore {
-  private config: InstanceSettings;
-  private settings: PluginSettings;
+  private config: InstanceSettings = DEFAULT_CONFIG;
+  private settings: PluginSettings = DEFAULT_SETTINGS;
   private _defaultPalette: string;
 
   setConfig(initial: InstanceSettings) {

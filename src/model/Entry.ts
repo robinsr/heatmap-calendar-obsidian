@@ -1,14 +1,13 @@
-import SettingsStore from "./SettingsStore.js";
-import {default as logger} from "./Log.js";
+import SettingsStore from "../plugin/SettingsStore.js";
+import {default as logger} from "../util/Log.js";
 
 const log = logger.module('Entry')
 
 export interface IEntry {
-  date: string
-  intensity?: number
-  color?: string
-  content?: string
-  _date?: Date
+  date: string;
+  intensity?: number;
+  color?: string;
+  content?: string;
 }
 
 export class Entry implements IEntry {
@@ -39,19 +38,8 @@ export class Entry implements IEntry {
     return this.entry.intensity;
   }
 
-
   // refers to the palette name
   get color() {
     return this.entry.color || SettingsStore.defaultPalette;
-  }
-}
-
-
-export class EntryList {
-
-  private entries: IEntry[];
-
-  constructor(entries: IEntry[]) {
-     this.entries = entries;
   }
 }

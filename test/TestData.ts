@@ -1,4 +1,4 @@
-import {IEntry} from "../src/js/Entry.js";
+import {IEntry} from "../src/model/Entry.js";
 
 export const TEST_YEAR = '2019';
 export const PREV_YEAR = '2018';

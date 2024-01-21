@@ -1,9 +1,9 @@
-import logger from "./Log.js";
-import {getDateString, getNow, getStartOfWeekDate, incrementDate, MONTHS} from "./DateUtil.js";
+import logger from "../util/Log.js";
+import {getDateString, getNow, getStartOfWeekDate, incrementDate, MONTHS} from "../util/DateUtil.js";
 import {Layout} from "./Layout.js";
 import {IEntry} from "./Entry.js";
 import {Box, BoxImpl} from "./Box.js";
-import SettingsStore from "./SettingsStore.js";
+import SettingsStore from "../plugin/SettingsStore.js";
 
 const log = logger.module('YearLayout');
 

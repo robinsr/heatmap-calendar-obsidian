@@ -1,10 +1,9 @@
-import {Plugin, App, SettingTab, PluginSettingTab} from 'obsidian';
-
-import logger, {LogLevel} from "./src/js/Log.js";
-import {DEFAULT_CONFIG} from 'src/js/SettingsStore.js';
-import {InstanceSettings, PluginSettings} from "./src/js/CalendarData.js";
-import HeatmapCalendar from "./src/js/HeatmapCalendar.js";
-import HeatmapCalendarSettingsTab from "./src/js/SettingsTab.js";
+import {Plugin} from 'obsidian';
+import logger, {LogLevel} from "./util/Log.js";
+import {DEFAULT_CONFIG} from 'src/plugin/SettingsStore.js';
+import {InstanceSettings, PluginSettings} from "./plugin/api.js";
+import HeatmapCalendar from "./plugin/HeatmapCalendar.js";
+import HeatmapCalendarSettingsTab from "./plugin/SettingsTab.js";
 
 
 export default class HeatmapCalendarPlugin extends Plugin {

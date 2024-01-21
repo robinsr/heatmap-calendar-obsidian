@@ -1,4 +1,4 @@
-import logger from "./Log.js";
+import logger from "../util/Log.js";
 import {
   incrementDate,
   getNow,
@@ -6,11 +6,11 @@ import {
   getStartOfWeekDate,
   MONTHS,
   ONE_YEAR_MILI
-} from "./DateUtil.js"
+} from "../util/DateUtil.js"
 import { Layout } from "./Layout.js"
 import { IEntry } from './Entry.js'
 import {Box, BoxImpl} from "./Box.js"
-import SettingsStore from "./SettingsStore.js";
+import SettingsStore from "../plugin/SettingsStore.js";
 
 const log = logger.module('RollingLayout');
 

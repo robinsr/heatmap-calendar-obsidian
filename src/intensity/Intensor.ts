@@ -1,6 +1,6 @@
-import {ColorOptions, IntensitySettings} from "./CalendarData.js";
-import {Entry, IEntry} from "./Entry.js";
-import logger, {LogLevel} from "./Log.js";
+import {ColorOptions, IntensitySettings} from "../plugin/api.js";
+import {Entry, IEntry} from "../model/Entry.js";
+import logger, {LogLevel} from "../util/Log.js";
 
 const log = logger.module('Intensor');
 //log.setLevel(LogLevel.debug)

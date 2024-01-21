@@ -1,8 +1,8 @@
 
 
-import {Layout} from "../src/js/Layout.js";
+import {Layout} from "../src/model/Layout.js";
 import {expect} from "chai";
-import SettingsStore, {DEFAULT_CONFIG} from "../src/js/SettingsStore.js";
+import SettingsStore, {DEFAULT_CONFIG, DEFAULT_SETTINGS} from "../src/plugin/SettingsStore.js";
 
 describe('Layout', function () {
   describe('getDayOfWeekLabels', function () {
@@ -19,8 +19,8 @@ describe('Layout', function () {
     });
 
     it('should return DOW labels starting with configured first DOW', function () {
-      SettingsStore.setConfig(
-        Object.assign({}, DEFAULT_CONFIG, { startDayOfWeek: 1 })
+      SettingsStore.setSettings(
+        Object.assign({}, DEFAULT_SETTINGS, { startDayOfWeek: 1 })
       );
 
       let layout = new Layout();

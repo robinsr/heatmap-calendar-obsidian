@@ -26,10 +26,20 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Overview.md",
+                "file": "Overview extended.md",
                 "mode": "preview",
                 "backlinks": false,
                 "source": true
+              }
+            }
+          },
+          {
+            "id": "f891449d675bbe97",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.2.7"
               }
             }
           },
@@ -47,7 +57,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -92,6 +102,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "6b4e687323a475c9",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -116,13 +134,13 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "e3904fc4ef1dd2f5",
+  "active": "f891449d675bbe97",
   "lastOpenFiles": [
-    "Single Color Test.md",
+    "daily notes/2022-02-06.md",
     "Overview extended.md",
     "Overview.md",
+    "Single Color Test.md",
     "daily notes/2023-01-19.md",
-    "daily notes/2022-02-06.md",
     "daily notes/2023-01-23.md",
     "daily notes/2022-02-17.md",
     "daily notes/2022-03-09.md",

@@ -1,6 +1,6 @@
-import SettingsStore, {DEFAULT_CONFIG} from "../src/js/SettingsStore.js";
-import {RollingLayout} from "../src/js/RollingLayout.js";
-import {IEntry} from "../src/js/Entry.js";
+import SettingsStore, {DEFAULT_CONFIG, DEFAULT_SETTINGS} from "../src/plugin/SettingsStore.js";
+import {RollingLayout} from "../src/model/RollingLayout.js";
+import {IEntry} from "../src/model/Entry.js";
 
 import sinon, {assert, SinonStub} from 'sinon';
 import {afterEach} from "mocha";
@@ -84,8 +84,8 @@ describe('RollingLayout', function () {
   describe('filterEntries', function () {
     describe('with DOW start on SUN', function () {
       it('should filter entries to correct time range', function () {
-        SettingsStore.setConfig(
-          Object.assign({}, DEFAULT_CONFIG, { startDayOfWeek: 0 })
+        SettingsStore.setSettings(
+          Object.assign({}, DEFAULT_SETTINGS, { startDayOfWeek: 0 })
         );
 
         let rl = new RollingLayout(testEntries);
@@ -107,8 +107,8 @@ describe('RollingLayout', function () {
 
     describe('with DOW start on MON', function () {
       it('with DOW start on MON', function () {
-        SettingsStore.setConfig(
-          Object.assign({}, DEFAULT_CONFIG, {startDayOfWeek: 1})
+        SettingsStore.setSettings(
+          Object.assign({}, DEFAULT_SETTINGS, {startDayOfWeek: 1})
         );
 
         let rl = new RollingLayout(testEntries);
@@ -133,7 +133,7 @@ describe('RollingLayout', function () {
   describe('generateBoxes', function() {
     describe('with DOW start on SUN', function () {
       it('creates a full set of renderable "boxes"', function () {
-        SettingsStore.setConfig(DEFAULT_CONFIG);
+        SettingsStore.setSettings(DEFAULT_SETTINGS);
         let rl = new RollingLayout(testEntries);
 
         let boxes = rl.generateBoxes();
@@ -147,8 +147,8 @@ describe('RollingLayout', function () {
 
     describe('with DOW start on MON', function () {
       it('creates a full set of renderable "boxes"', function () {
-        SettingsStore.setConfig(
-          Object.assign({}, DEFAULT_CONFIG, { startDayOfWeek: 1 })
+        SettingsStore.setSettings(
+          Object.assign({}, DEFAULT_SETTINGS, { startDayOfWeek: 1 })
         );
 
         let rl = new RollingLayout(testEntries);

@@ -1,6 +1,5 @@
 import {App, PluginSettingTab, Setting} from "obsidian";
-import HeatmapCalendarPlugin from "../../main.js";
-import {DOW} from "./DateUtil.js";
+import HeatmapCalendarPlugin from "../main.js";
 
 const DOW_OPTIONS: Record<string, string> = {
   '0': 'Sunday',
@@ -29,7 +28,6 @@ export default class HeatmapCalendarSettingsTab extends PluginSettingTab {
           .addOptions(DOW_OPTIONS)
           .setValue(this.plugin.settings.startDayOfWeek.toString())
           .onChange(async value => {
-            console.log(value)
             this.plugin.settings.startDayOfWeek = parseInt(value);
             await this.plugin.saveSettings();
           })

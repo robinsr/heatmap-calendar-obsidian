@@ -39,10 +39,10 @@ renderHeatmapCalendar(this.container, calendarData)
  
 ```dataviewjs
 
-dv.span("**💸 Money Spent 2022 💸**")
+dv.span("**💸 Money Spent 2023 💸**")
 
 const calendarData = {
-    year: 2022,
+    year: 2023,
     entries: [],
 }
 

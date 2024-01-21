@@ -1,4 +1,4 @@
-import SettingsStore from "./SettingsStore.js";
+import SettingsStore from "../plugin/SettingsStore.js";
 import {IEntry} from './Entry.js';
 import {Box} from './Box.js';
 

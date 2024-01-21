@@ -1,9 +1,9 @@
-import {CalendarData, InstanceSettings, PluginSettings} from "./CalendarData.js";
-import {Box} from "./Box.js";
-import {RollingLayout} from "./RollingLayout.js";
-import {YearLayout} from "./YearLayout.js";
-import {Layout} from "./Layout.js";
-import {Intensor} from "./Intensor.js";
+import {InstanceSettings, PluginSettings} from "./api.js";
+import {Box} from "../model/Box.js";
+import {RollingLayout} from "../model/RollingLayout.js";
+import {YearLayout} from "../model/YearLayout.js";
+import {Layout} from "../model/Layout.js";
+import {Intensor} from "../intensity/Intensor.js";
 import SettingsStore from "./SettingsStore.js";
 
 

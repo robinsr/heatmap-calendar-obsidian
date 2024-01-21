@@ -1,6 +1,6 @@
 import { IEntry } from "./Entry.js";
-import {getDateString, isToday} from "./DateUtil.js";
-import store from './SettingsStore.js';
+import {getDateString, isToday} from "../util/DateUtil.js";
+import store from '../plugin/SettingsStore.js';
 
 export interface Box {
   date: string;

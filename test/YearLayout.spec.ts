@@ -1,5 +1,5 @@
-import {YearLayout} from "../src/js/YearLayout.js";
-import {IEntry} from "../src/js/Entry.js";
+import {YearLayout} from "../src/model/YearLayout.js";
+import {IEntry} from "../src/model/Entry.js";
 
 import sinon, {assert, SinonStub} from 'sinon';
 import {afterEach} from "mocha";

@@ -1,9 +1,9 @@
-import logger, {LogLevel, setLevel} from "../src/js/Log.js";
-import {Intensor} from "../src/js/Intensor.js";
-import {IEntry} from "../src/js/Entry.js";
+import logger, {LogLevel, setLevel} from "../src/util/Log.js";
+import {Intensor} from "../src/intensity/Intensor.js";
+import {IEntry} from "../src/model/Entry.js";
 import {newTestEntry, TEST_YEAR} from "./TestData.js";
-import {CalendarData, IntensitySettings} from "../src/js/CalendarData.js";
-import SettingsStore from "../src/js/SettingsStore.js";
+import {Api, InstanceSettings, IntensitySettings} from "../src/plugin/api.js";
+import SettingsStore from "../src/plugin/SettingsStore.js";
 import {expect} from "chai";
 
 setLevel(LogLevel.off)
@@ -42,12 +42,11 @@ const testPalettes = {
   paletteB: [ '#111', '#222', '#333', '#444', '#555', '#666', '#777', '#888', '#999', '#aaa' ]
 }
 
-const DEFAULT_SETTINGS: CalendarData = {
+const DEFAULT_SETTINGS: InstanceSettings = {
   year: new Date().getUTCFullYear(),
   colors: testPalettes,
   entries: [],
-  showCurrentDayBorder: true,
-  startDayOfWeek: 1
+  showCurrentDayBorder: true
 }
 
 /**
